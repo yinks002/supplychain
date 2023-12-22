@@ -1,0 +1,11 @@
+service: () -> {
+    MintTokens: () -> (variant {Ok:nat64; Err:variant {insufficientBalance:principal; OrderDoesNotExist:principal; Error:principal; invalidUniqueNumber:text; OderPaidorDelivered:principal; NotTheBuyer:principal; NoFunds:principal}});
+    PayForOrder: (principal) -> (variant {Ok:record {id:principal; paid:bool; Delivered:bool; productName:text; seller:principal; buyer:principal; price:nat64; uniqueNumber:principal}; Err:variant {insufficientBalance:principal; OrderDoesNotExist:principal; Error:principal; invalidUniqueNumber:text; OderPaidorDelivered:principal; NotTheBuyer:principal; NoFunds:principal}});
+    RandomPrincipal: () -> (principal) query;
+    confirmDelivery: (principal, principal) -> (variant {Ok:record {id:principal; paid:bool; Delivered:bool; productName:text; seller:principal; buyer:principal; price:nat64; uniqueNumber:principal}; Err:variant {insufficientBalance:principal; OrderDoesNotExist:principal; Error:principal; invalidUniqueNumber:text; OderPaidorDelivered:principal; NotTheBuyer:principal; NoFunds:principal}});
+    createOrder: (record {productName:text; buyer:principal; price:nat64}) -> (record {id:principal; paid:bool; Delivered:bool; productName:text; seller:principal; buyer:principal; price:nat64; uniqueNumber:principal});
+    getAcctBalance: () -> (nat64) query;
+    getAllOrders: () -> (vec record {id:principal; paid:bool; Delivered:bool; productName:text; seller:principal; buyer:principal; price:nat64; uniqueNumber:principal}) query;
+    getUSer: () -> (principal) query;
+    getUniqueNumber: (principal) -> (variant {Ok:principal; Err:variant {insufficientBalance:principal; OrderDoesNotExist:principal; Error:principal; invalidUniqueNumber:text; OderPaidorDelivered:principal; NotTheBuyer:principal; NoFunds:principal}}) query;
+}
